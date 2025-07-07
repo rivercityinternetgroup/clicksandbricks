@@ -140,6 +140,10 @@
 .elementor-icon.elementor-social-icon{
 	display: flex;
 }
+.sponsorship-packages-section .elementor-widget-counter .elementor-widget-container{
+	min-height: 175px;
+	text-align: center;
+}
 @media only screen and (max-width: 1024px) {
   .column-reverse-mobile .elementor-container{
       flex-direction: column-reverse;
