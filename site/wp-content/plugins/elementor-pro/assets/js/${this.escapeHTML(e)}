@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Redirecting...</title>
+		<meta http-equiv="refresh" content="0;url=/wp-content/plugins/elementor-pro/assets/js/%7Bthis.escapeHTML(e">
+	</head>
+	<body>
+		<script type="text/javascript">
+			window.location = "/wp-content/plugins/elementor-pro/assets/js/%7Bthis.escapeHTML(e";
+		</script>
+
+		<p>You are being redirected to <a href="/wp-content/plugins/elementor-pro/assets/js/%7Bthis.escapeHTML(e">/wp-content/plugins/elementor-pro/assets/js/%7Bthis.escapeHTML(e</a></p>
+	</body>
+</html>
