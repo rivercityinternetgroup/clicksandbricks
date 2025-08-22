@@ -1159,7 +1159,7 @@
         width: 55%;
         float: left;
         height: 500px;
-        background: url('/wp-content/plugins/feeds-for-youtube/img/sw-screenshot.png') no-repeat center center;
+        background: url('../img/sw-screenshot.png') no-repeat center center;
         background-size: cover;
     }
     #sbspf_admin .sbspf-sw-screenshot img{
