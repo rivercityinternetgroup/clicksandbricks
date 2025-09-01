@@ -1,11 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><p>import {addAction, applyFilters, createHooks, doAction, hasFilter} from "@wordpress/hooks";
+import {addAction, applyFilters, createHooks, doAction, hasFilter} from "@wordpress/hooks";
 let Builder,
 	sketch = VueColor.Sketch,
 	dummyLightBoxComponent = 'sby-dummy-lightbox-component';
 
 
-SB_Customizer.initPromise.then((customizer) =&gt; {
+SB_Customizer.initPromise.then((customizer) => {
 	const extraMethods =  {
 		...customizer.extraMethods,
 		updateColorValue : function(id){
@@ -17,10 +16,10 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		sw_feed_params: function() {
 			let sw_feed_param = '';
 			if ( this.sw_feed ) {
-				sw_feed_param += '&amp;sw-feed=true';
+				sw_feed_param += '&sw-feed=true';
 			}
 			if ( this.sw_feed_id ) {
-				sw_feed_param += '&amp;sw-feed-id=' + this.sw_feed_id;
+				sw_feed_param += '&sw-feed-id=' + this.sw_feed_id;
 			}
 			return sw_feed_param;
 		},
@@ -32,7 +31,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				sw_return_url = 'admin.php?page=sbsw#/create-feed'
 			}
 			if ( self.sw_feed_id ) {
-				sw_return_url = 'admin.php?page=sbsw&amp;feed_id=' + self.sw_feed_id
+				sw_return_url = 'admin.php?page=sbsw&feed_id=' + self.sw_feed_id
 			}
 			return sw_return_url;
 		},
@@ -96,7 +95,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		},
 
 		/**
-		 * Show &amp; Hide View
+		 * Show & Hide View
 		 *
 		 * @since 2.0
 		 */
@@ -118,7 +117,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				self.viewsActive.feedTemplateElement = null;
 				document.querySelector('body').classList.toggle('overflow-hidden');
 			}
-			if(viewName == 'embedPopup' &amp;&amp; ajaxAction == true){
+			if(viewName == 'embedPopup' && ajaxAction == true){
 				self.saveFeedSettings();
 			}
 
@@ -130,7 +129,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		 * @since 4.0
 		 */
 		TriggerInstallLightbox: function (plugin) {
-			if (plugin.installed &amp;&amp; plugin.activated) {
+			if (plugin.installed && plugin.activated) {
 				window.location = plugin.dashboard_permalink;
 				return;
 			}
@@ -188,7 +187,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			self.loadingBar = true;
 			self.ajaxPost(updateFeedData, function(_ref){
 				var data = _ref.data;
-				if(data &amp;&amp; data.success === true){
+				if(data && data.success === true){
 					self.processNotification('feedSaved');
 					self.customizerFeedDataInitial = self.customizerFeedData;
 					if( leavePage === true){
@@ -227,7 +226,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				self.licenseBtnClicked = false;
 				var data = _ref.data;
 
-				if(data &amp;&amp; data.success == false) {
+				if(data && data.success == false) {
 					self.processNotification("licenseError");
 					return;
 				}
@@ -261,7 +260,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				var data = _ref.data;
 				if( data !== false ){
 					self.updatedTimeStamp = new Date().getTime();
-					self.template = String("</p><div>"+data.feed_html+"</div>");
+					self.template = String("<div>"+data.feed_html+"</div>");
 					self.processNotification('cacheCleared');
 				}else{
 					self.processNotification("unkownError");
@@ -278,7 +277,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				self.customizerFeedData.settings[settingID] = self.customizerFeedData.settings[settingID] == checkBoxAction.options.enabled ? checkBoxAction.options.disabled : checkBoxAction.options.enabled;
 			}else{
 				var settingValue = self.customizerFeedData.settings[settingID];
-				if(!Array.isArray(settingValue) &amp;&amp; settingID == 'type'){
+				if(!Array.isArray(settingValue) && settingID == 'type'){
 					settingValue = [settingValue];
 				}
 				if(settingValue.includes(value)){
@@ -289,7 +288,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				if(settingID == 'type'){
 					self.processFeedTypesSources( settingValue );
 				}
-				//settingValue = (settingValue.length == 1 &amp;&amp; settingID == 'type') ? settingValue[0] : settingValue;
+				//settingValue = (settingValue.length == 1 && settingID == 'type') ? settingValue[0] : settingValue;
 				self.customizerFeedData.settings[settingID] = settingValue;
 			}
 
@@ -306,7 +305,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		},
 
 		/**
-		 * Loading Bar &amp; Notification
+		 * Loading Bar & Notification
 		 *
 		 * @since 2.0
 		 */
@@ -374,12 +373,12 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		 * @since 2.0
 		 */
 		scrollToHighLightedSection : function(sectionId){
-			const element = document.getElementById(sectionId) !== undefined &amp;&amp; document.getElementById(sectionId) !== null ?
+			const element = document.getElementById(sectionId) !== undefined && document.getElementById(sectionId) !== null ?
 				document.getElementById(sectionId) :
-				( document.getElementsByClassName(sectionId)[0] !== undefined &amp;&amp; document.getElementsByClassName(sectionId)[0] !== null ? document.getElementsByClassName(sectionId)[0] : null );
+				( document.getElementsByClassName(sectionId)[0] !== undefined && document.getElementsByClassName(sectionId)[0] !== null ? document.getElementsByClassName(sectionId)[0] : null );
 
 
-			if(element != undefined &amp;&amp; element != null){
+			if(element != undefined && element != null){
 				const y = element.getBoundingClientRect().top - 120 + window.pageYOffset - 10;
 				window.scrollTo({top: y, behavior: 'smooth'});
 			}
@@ -405,17 +404,17 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				return !self.viewsActive[control.checkView];
 			}
 
-			if(control.checkExtension != undefined &amp;&amp; control.checkExtension != false &amp;&amp; !self.checkExtensionActive(control.checkExtension)){
+			if(control.checkExtension != undefined && control.checkExtension != false && !self.checkExtensionActive(control.checkExtension)){
 				return self.checkExtensionActive(control.checkExtension);
 			}
 
-			if(control.conditionDimmed != undefined &amp;&amp; self.checkControlCondition(control.conditionDimmed) )
+			if(control.conditionDimmed != undefined && self.checkControlCondition(control.conditionDimmed) )
 				return self.checkControlCondition(control.conditionDimmed);
 			if(control.overrideColorCondition != undefined){
 				return self.checkControlOverrideColor( control.overrideColorCondition );
 			}
 
-			return ( control.conditionHide != undefined &amp;&amp; control.condition != undefined || control.checkExtension != undefined )
+			return ( control.conditionHide != undefined && control.condition != undefined || control.checkExtension != undefined )
 				? self.checkControlCondition(control.condition, control.checkExtension)
 				: true;
 		},
@@ -429,11 +428,11 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			var self = this,
 				isConditionTrue = 0;
 			overrideConditionsArray.map(function(condition, index){
-				if(self.checkNotEmpty(self.customizerFeedData.settings[condition]) &amp;&amp; self.customizerFeedData.settings[condition].replace(/ /gi,'') != '#'){
+				if(self.checkNotEmpty(self.customizerFeedData.settings[condition]) && self.customizerFeedData.settings[condition].replace(/ /gi,'') != '#'){
 					isConditionTrue += 1
 				}
 			});
-			return (isConditionTrue &gt;= 1) ? true : false;
+			return (isConditionTrue >= 1) ? true : false;
 		},
 		switchNestedSection : function(sectionId, section){
 			var self = this;
@@ -445,7 +444,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				var elementSectionData = self.customizerSidebarBuilder;
 
 				sectionArray.map(function(elm, index){
-					elementSectionData = (elementSectionData[elm] != undefined &amp;&amp; elementSectionData[elm] != null) ? elementSectionData[elm] : null;
+					elementSectionData = (elementSectionData[elm] != undefined && elementSectionData[elm] != null) ? elementSectionData[elm] : null;
 				});
 				if(elementSectionData != null){
 					self.customizerScreens.activeSection = sectionId['id'];
@@ -466,8 +465,8 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				if(conditionsArray[condition].indexOf(self.customizerFeedData.settings[condition]) !== -1)
 					isConditionTrue += 1
 			});
-			var extensionCondition = checkExtensionActive != undefined &amp;&amp; checkExtensionActive != false ? self.checkExtensionActive(checkExtensionActive) : true,
-				extensionCondition = checkExtensionActiveDimmed != undefined &amp;&amp; checkExtensionActiveDimmed != false &amp;&amp; !self.checkExtensionActive(checkExtensionActiveDimmed) ? false : extensionCondition;
+			var extensionCondition = checkExtensionActive != undefined && checkExtensionActive != false ? self.checkExtensionActive(checkExtensionActive) : true,
+				extensionCondition = checkExtensionActiveDimmed != undefined && checkExtensionActiveDimmed != false && !self.checkExtensionActive(checkExtensionActiveDimmed) ? false : extensionCondition;
 
 			return (isConditionTrue == Object.keys(conditionsArray).length) ? ( extensionCondition ) : false;
 		},
@@ -496,8 +495,8 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				result 	= false;
 			var self = this, result = false;
 			if(
-				(self.viewsActive.feedTemplateElement === null &amp;&amp; self.customizerFeedData.settings.feedtemplate === feedtemplate) ||
-				(self.viewsActive.feedTemplateElement !== null &amp;&amp; self.viewsActive.feedTemplateElement == feedtemplate)
+				(self.viewsActive.feedTemplateElement === null && self.customizerFeedData.settings.feedtemplate === feedtemplate) ||
+				(self.viewsActive.feedTemplateElement !== null && self.viewsActive.feedTemplateElement == feedtemplate)
 			){
 				result = true;
 			}
@@ -508,7 +507,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			self.selectedFeed = feedType.type;
 			let ifFeedAvailable = self.hasFeature(self.selectedFeed + '_feeds');
 
-			if ( self.selectedFeed != 'channel' &amp;&amp; !self.apiKeyStatus &amp;&amp; self.selectedFeed !== 'social_wall' ) {
+			if ( self.selectedFeed != 'channel' && !self.apiKeyStatus && self.selectedFeed !== 'social_wall' ) {
 				self.viewsActive.feedtypesPopup = false;
 				self.activateView('accountAPIPopup');
 				self.shouldShowFeedAPIForm = true;
@@ -554,8 +553,8 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			let result = self.feedTypes.filter(function(tp){
 				return tp.type === self.customizerFeedData.settings.type
 			});
-			self.customizerScreens.printedTemplate = result.length &gt; 0 ? result[0] : [];
-			return result.length &gt; 0 ? true : false;
+			self.customizerScreens.printedTemplate = result.length > 0 ? result[0] : [];
+			return result.length > 0 ? true : false;
 		},
 		customizerFeedTemplatePrint : function(){
 			var self = this;
@@ -566,8 +565,8 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			let result = self.feedTemplates.filter(function(tp){
 				return tp.type === self.customizerFeedData.settings.feedtemplate
 			});
-			self.customizerScreens.printedTemplate = result.length &gt; 0 ? result[0] : [];
-			return result.length &gt; 0 ? true : false;
+			self.customizerScreens.printedTemplate = result.length > 0 ? result[0] : [];
+			return result.length > 0 ? true : false;
 		},
 		updateFeedTemplateCustomizer : function(){
 			var self = this;
@@ -602,7 +601,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		 * @return boolean
 		 */
 		checkNotEmpty : function(value){
-			return value != null &amp;&amp; value.replace(/ /gi,'') != '';
+			return value != null && value.replace(/ /gi,'') != '';
 		},
 
 		/**
@@ -701,14 +700,14 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 						if ( self.connectedAccountStatus || self.apiKeyStatus ) {
 							self.switchScreen('selectedFeedSection', 'selectSource');
 						}
-						if ( !self.connectedAccountStatus &amp;&amp; !self.apiKeyStatus ) {
+						if ( !self.connectedAccountStatus && !self.apiKeyStatus ) {
 							self.activateView('accountAPIPopup');
 						}
 						return;
 					}
 
 					// if feed type is not channel
-					if ( self.selectedFeed !== 'channel' &amp;&amp; !self.apiKeyStatus  ) {
+					if ( self.selectedFeed !== 'channel' && !self.apiKeyStatus  ) {
 						self.activateView('accountAPIPopup');
 						self.shouldShowFeedAPIForm = true;
 						return;
@@ -862,7 +861,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			var self = this;
 			switch (self.selectedBulkAction) {
 				case 'delete':
-					if(self.feedsSelected.length &gt; 0){
+					if(self.feedsSelected.length > 0){
 						self.openDialogBox('deleteMultipleFeeds')
 					}
 					break;
@@ -899,8 +898,8 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		 toggleElementTooltip : function(tooltipText, type, align = 'center'){
 			var self = this,
 				target = window.event.currentTarget,
-				tooltip = (target != undefined &amp;&amp; target != null) ? document.querySelector('.sb-control-elem-tltp-content') : null;
-			if(tooltip != null &amp;&amp; type == 'show'){
+				tooltip = (target != undefined && target != null) ? document.querySelector('.sb-control-elem-tltp-content') : null;
+			if(tooltip != null && type == 'show'){
 				self.tooltip.text = tooltipText;
 				var position = target.getBoundingClientRect(),
 					left = position.left + 10,
@@ -942,8 +941,8 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
                 credentials: 'same-origin',
                 body: data
             })
-            .then(response =&gt; response.json())
-            .then(data =&gt; {
+            .then(response => response.json())
+            .then(data => {
                 if ( data.success == true ) {
                     if ( data.data.license == 'valid' ) {
                         this.recheckLicenseStatus = 'success';
@@ -1012,10 +1011,10 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				currentPage = self.feedPagination.currentPage,
 				pagesNumber = self.feedPagination.pagesNumber;
 			self.loadingBar = true;
-			if((currentPage != 1 &amp;&amp; type == 'prev') || (currentPage &lt;  pagesNumber &amp;&amp; type == 'next')){
+			if((currentPage != 1 && type == 'prev') || (currentPage <  pagesNumber && type == 'next')){
 				self.feedPagination.currentPage = (type == 'next') ?
-					(currentPage &lt; pagesNumber ? (parseInt(currentPage) + 1) : pagesNumber) :
-					(currentPage &gt; 1 ? (parseInt(currentPage) - 1) : 1);
+					(currentPage < pagesNumber ? (parseInt(currentPage) + 1) : pagesNumber) :
+					(currentPage > 1 ? (parseInt(currentPage) - 1) : 1);
 
 				var postData = {
 	                action : 'sby_feed_saver_manager_get_feed_list_page',
@@ -1130,7 +1129,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		 */
 		onboardingHideShow : function() {
 			var tooltips = document.querySelectorAll(".sb-onboarding-tooltip");
-			for (var i = 0; i &lt; tooltips.length; i++){
+			for (var i = 0; i < tooltips.length; i++){
 				tooltips[i].style.display = "none";
 			}
 			document.querySelectorAll(".sb-onboarding-tooltip-"+this.viewsActive.onboardingStep)[0].style.display = "block";
@@ -1158,7 +1157,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				return;
 			}
 
-			if (self.viewsActive.onboardingCustomizerPopup &amp;&amp; self.iscustomizerScreen &amp;&amp; self.customizerFeedData) {
+			if (self.viewsActive.onboardingCustomizerPopup && self.iscustomizerScreen && self.customizerFeedData) {
 				if (document.getElementById("sb-onboarding-tooltip-customizer-1") !== null) {
 					wrapElem.classList.add('sb-onboarding-active');
 
@@ -1173,7 +1172,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 
 					self.onboardingHideShow();
 				}
-			} else if (self.viewsActive.onboardingPopup &amp;&amp; !self.iscustomizerScreen) {
+			} else if (self.viewsActive.onboardingPopup && !self.iscustomizerScreen) {
 				if (sbc_builder.allFeedsScreen.onboarding.type === 'single') {
 					if (document.getElementById("sb-onboarding-tooltip-single-1") !== null) {
 						wrapElem.classList.add('sb-onboarding-active');
@@ -1375,7 +1374,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			}
 		},
 		/**
-		 * Clear &amp; Reset Color Override
+		 * Clear & Reset Color Override
 		 *
 		 * @since 4.0
 		*/
@@ -1414,7 +1413,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		},
 		movePopUp : function(){
 			var overlay = document.querySelectorAll("sb-fs-boss");
-			if (overlay.length &gt; 0) {
+			if (overlay.length > 0) {
 				document.getElementById("wpbody-content").prepend(overlay[0]);
 			}
 		},
@@ -1422,7 +1421,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			var objectResult = objectArray.filter(function(elem){
 				return elem[byWhat] == object[byWhat];
 			});
-			return (objectResult.length &gt; 0) ? true : false;
+			return (objectResult.length > 0) ? true : false;
 		},
 		getModerationShoppableMode : function(){
 			if( this.viewsActive.moderationMode || this.customizerScreens.activeSection == 'settings_shoppable_feed'){
@@ -1433,7 +1432,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			return this.moderationShoppableMode;
 		},
 		getModerationShoppableModeOffset : function(){
-			return this.moderationShoppableModeOffset &gt; 0;
+			return this.moderationShoppableModeOffset > 0;
 		},
 
 		formatSubscriberCount : function( strings ) {
@@ -1470,7 +1469,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		customizerFeedDataInitial : null,
 		customizerFeedData 	: sbc_builder.customizerFeedData,
 		customizerHeaderData : sbc_builder.headerData,
-		iscustomizerScreen  : (sbc_builder.customizerFeedData != undefined &amp;&amp; sbc_builder.customizerFeedData != false),
+		iscustomizerScreen  : (sbc_builder.customizerFeedData != undefined && sbc_builder.customizerFeedData != false),
 		selectFeedTypeScreen 	: sbc_builder.selectFeedTypeScreen,
 		customizerSidebarBuilder : sbc_builder.customizerSidebarBuilder,
 		feedTypes 	: sbc_builder.feedTypes,
@@ -1661,7 +1660,7 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 			// get the socail wall link feed url params
 			self.sw_feed = urlParams.get('sw-feed');
 			self.sw_feed_id = urlParams.get('sw-feed-id');
-			setTimeout(() =&gt; {
+			setTimeout(() => {
 				const queryString = window.location.search,
 					urlParams = new URLSearchParams(queryString),
 					page = urlParams.get('page'),
@@ -1680,15 +1679,15 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 				}
 
 				// check if access token is available on the feed builder page then switch the screen
-				if ( page == 'sby-feed-builder' &amp;&amp; sby_access_token &amp;&amp; sby_refresh_token ) {
+				if ( page == 'sby-feed-builder' && sby_access_token && sby_refresh_token ) {
 					self.switchScreen('pageScreen', 'selectFeed');
 					self.switchScreen('selectedFeedSection', 'selectSource');
 				}
 
-				self.activeExtensionsFull.map( element =&gt; self.activeExtensions[element['type']] = element['active'] );
-				self.activeExtensionsFull.map( element =&gt; {
+				self.activeExtensionsFull.map( element => self.activeExtensions[element['type']] = element['active'] );
+				self.activeExtensionsFull.map( element => {
 					if( element['active'] == false ){
-						element['ids'].forEach((id) =&gt; {
+						element['ids'].forEach((id) => {
 							self.inActiveExtensions[id] = element['type'];
 						})
 					}
@@ -1700,4 +1699,4 @@ SB_Customizer.initPromise.then((customizer) =&gt; {
 		},
 		methods: extraMethods
 	})
-})</body></html>
+})
