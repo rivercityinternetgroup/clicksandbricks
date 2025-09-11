@@ -1,0 +1,65 @@
+:root{--page-title-display:none;}/* Start custom CSS */header,
+footer{display: none !important;}
+.row{
+    display: flex;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.row .col-md-12{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.row .col-md-6{
+    width: 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.row .col-md-3{
+    width: 33.3%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.wpcf7 .wpcf7-form-control:not(.wpcf7-acceptance){
+    min-height: 40px;
+    border-radius: 10px !important;
+    border-color: #9b9797;
+    padding: 10px 15px !important;
+}
+.wpcf7 .wpcf7-list-item{
+    margin-left: 0;
+}
+.wpcf7 label{
+    font-weight: bold;
+    color: #F37E2E !important;
+    margin-bottom: 5px;
+}
+.wpcf7 .wpcf7-spinner{
+    margin: 0;
+    position: absolute;
+    left: 15%;
+    bottom: 9px;
+}
+.wpcf7 span.buttons{
+    display: block;
+    margin-top: 20px;
+}
+.wpcf7 form.sent .wpcf7-response-output{
+    border-color: #46b450;
+    background-color: #46b450;
+    color: #fff;
+    padding: 10px 15px;
+    margin: 20px 0;
+}
+.wpcf7 button,
+.wpcf7 button:hover,
+.wpcf7 button:active,
+.wpcf7 button:focus{
+    background-color: #F37E2E;
+    color: #fff;
+    border-color: #fff;
+    border-radius: 10px
+}
+.wpcf7-form.payment-required .wpcf7-response-output{
+    display: none !important;
+}/* End custom CSS */
