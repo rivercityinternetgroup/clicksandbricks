@@ -9,4 +9,12 @@ jQuery(document).ready(function($) {
         src = src.replace("%%DEV_URL%%", devUrl);
         $(this).attr("src", src);
     });
+
+	document.addEventListener('wpcf7mailsent', function (event) {
+		// Replace 1234 with your CF7 form ID
+		if (event.detail.contactFormId == 6869) {
+			window.location.href = "/gladiator-series-thank-you/";
+		}
+	}, false);
+	
 });
