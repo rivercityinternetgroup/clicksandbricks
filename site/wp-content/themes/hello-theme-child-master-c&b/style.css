@@ -19,8 +19,7 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
 	overflow: hidden;
 }
 .page-id-5605 #wpadminbar,
-.page-id-6870 #wpadminbar,
-.page-id-6887 #wpadminbar{
+.page-id-6870 #wpadminbar{
 	display: none;
 }
 .page-id-5605 header,
@@ -64,8 +63,8 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
 .wpcf7 .wpcf7-spinner{
     margin: 0;
     position: absolute;
-    left: 22%;
-    bottom: 9px;
+    left: 24%;
+    bottom: 3.8%;
 }
 .wpcf7 span.buttons{
     display: block;
