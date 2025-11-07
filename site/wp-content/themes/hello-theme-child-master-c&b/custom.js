@@ -10,11 +10,11 @@ jQuery(document).ready(function($) {
         $(this).attr("src", src);
     });
 
-	document.addEventListener('wpcf7mailsent', function (event) {
-		// Replace 1234 with your CF7 form ID
-		if (event.detail.contactFormId == 6869) {
-			window.location.href = "/gladiator-series-thank-you/";
-		}
-	}, false);
+// 	document.addEventListener('wpcf7mailsent', function (event) {
+// 		// Replace 1234 with your CF7 form ID
+// 		if (event.detail.contactFormId == 6869) {
+// 			window.location.href = "/gladiator-series-thank-you/";
+// 		}
+// 	}, false);
 	
 });
