@@ -5,8 +5,8 @@ Support Website: http://smashballoon/youtube-feed/
 Tags: YouTube, YouTube feed, YouTube widget, YouTube channel, YouTube gallery
 Requires at least: 4.1
 Requires PHP: 7.4
-Tested up to: 6.8
-Stable tag: 2.4.0
+Tested up to: 6.9
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,11 @@ By default, the plugin retrieves new videos for your YouTube gallery once every 
 6. Embed your YouTube feed using a shortcode you can copy and paste after you are done creating
 
 == Changelog ==
+
+= 2.6.1 =
+* Tweak: Implemented CSS and JS minification for improved load times and performance.
+* Fix: i18n _load_textdomain_just_in_time error has been resolved.
+* Fix: Additonal plugin hardening.
 
 = 2.4.0 =
 * New: Added support for a new GDPR consent plugin (WPConsent)[https://wpconsent.com/?utm_campaign=youtube-free-readme&utm_source=changelog&utm_medium=wpconsentannouncement]
