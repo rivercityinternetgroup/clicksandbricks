@@ -19,7 +19,6 @@
 #elementor-panel-category-smash-balloon .icon{
 	height: 44px;
 }
-
 #elementor-panel-category-smash-balloon .elementor-element:before{
 	content:  url("data:image/svg+xml,%3Csvg width=%2713%27 height=%2717%27 viewBox=%270 0 13 17%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath fill-rule=%27evenodd%27 clip-rule=%27evenodd%27 d=%27M12.1181 7.76035C12.1181 3.75058 9.48981 0.5 6.24644 0.5C3.00307 0.5 0.373535 3.75058 0.373535 7.76035C0.373535 11.6043 2.78204 14.7408 5.83201 15.0039L5.50767 16.0309L7.54138 15.858L6.82784 14.9859C9.79733 14.6255 12.1181 11.5287 12.1181 7.76035Z%27 fill=%27%23636D75%27/%3E%3Cpath fill-rule=%27evenodd%27 clip-rule=%27evenodd%27 d=%27M7.64698 3.05249L7.92956 5.96825L10.8576 6.05236L8.7395 8.02172L10.4124 10.4413L7.59414 9.91157L6.73975 12.7299L5.44249 10.2061L2.82313 11.4063L3.83076 8.70076L1.27612 7.41224L4.01079 6.53275L3.25618 3.83878L5.84337 5.31376L7.64698 3.05249Z%27 fill=%27white%27/%3E%3C/svg%3E%0A");
 	position: absolute;
@@ -29,8 +28,6 @@
 #elementor-panel-category-smash-balloon .elementor-element:hover:before{
 	content:  url("data:image/svg+xml,%3Csvg width=%2713%27 height=%2717%27 viewBox=%270 0 13 17%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath fill-rule=%27evenodd%27 clip-rule=%27evenodd%27 d=%27M12.1181 7.76035C12.1181 3.75058 9.48981 0.5 6.24644 0.5C3.00307 0.5 0.373535 3.75058 0.373535 7.76035C0.373535 11.6043 2.78204 14.7408 5.83201 15.0039L5.50767 16.0309L7.54138 15.858L6.82784 14.9859C9.79733 14.6255 12.1181 11.5287 12.1181 7.76035Z%27 fill=%27%23FE544F%27/%3E%3Cpath fill-rule=%27evenodd%27 clip-rule=%27evenodd%27 d=%27M7.64698 3.05249L7.92956 5.96825L10.8576 6.05236L8.7395 8.02172L10.4124 10.4413L7.59414 9.91157L6.73975 12.7299L5.44249 10.2061L2.82313 11.4063L3.83076 8.70076L1.27612 7.41224L4.01079 6.53275L3.25618 3.83878L5.84337 5.31376L7.64698 3.05249Z%27 fill=%27white%27/%3E%3C/svg%3E%0A");
 }
-
-
 .sb-popup-cls{
 	height: 14px;
 	width: 14px;
@@ -70,7 +67,6 @@
 		max-width: calc(100% - 100px);
 	}
 }
-
 /* Install Plugin Modal on Select Source Flow */
 .sb-btn-orange{
 	background: #FE544F!important;
@@ -87,7 +83,6 @@
 	border-color: #BC120E!important;
 	color: #fff!important;
 }
-
 /*red*/
 .sb-btn-blue{
 	background: #0068A0!important;
@@ -164,7 +159,6 @@
 .sb-install-plugin-body .sb-install-plugin-header p .sb-author-logo {
 	margin-left: 8px;
 }
-
 .sb-install-plugin-body .sb-install-plugin-content {
 	padding: 20px 107px 32px 20px;
 }
@@ -216,7 +210,6 @@
 .sb-plugin-image svg{
  transform: rotate(-3deg);
 }
-
 .sb-plugin-cta-logo {
 	position: absolute;
 	left: -11px;

@@ -66,14 +66,12 @@
     width: 100%;
     padding: 0;
 }
-
 .sby_notice.sby_review_notice_step_1 .sby-notice-text {
     width: auto;
 }
 .sby_notice .sby-notice-text .sby-notice-text-p {
     margin-bottom: 15px;
 }
-
 .sby_notice .sby-notice-text .sby-notice-text-header {
     font-size: 16px;
     margin: 0 0 10px;
@@ -163,7 +161,6 @@ body .sby_review_step1_notice .sby-btn-link {
 body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     margin-right: 12px;
 }
-
 .sby_notice .sby_notice_close,
 .sby_notice .sby_bfcm_sale_notice_close,
 .sby_notice .sby_new_user_sale_notice_close {
@@ -177,9 +174,7 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
 .sby_notice .sby_notice_close:focus{
     color: #a34100;
 }
-
 /* Notice CTA btn */
-
 .sby_notice .sby_other_notice{
     padding-top: 10px;
     font-style: italic;
@@ -191,7 +186,6 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
 .sby-notice-consent-btns {
     float: left;
 }
-
 .sby-notice-consent-btns .sby-btn-link {
     font-size: 16px;
     font-weight: 600;
@@ -228,11 +222,9 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     margin: 0 0 14px 0;
     box-sizing: border-box;
 }
-
 #sby-notifications * {
     box-sizing: border-box;
 }
-
 #sby-notifications .bell,
 #sby-notifications .thumb{
     position: absolute;
@@ -261,11 +253,9 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     font-weight: bold;
     text-align: center;
 }
-
 #sby-notifications .messages .message {
     display: none;
 }
-
 #sby-notifications .messages .message.current {
     display: block;
     padding: 0px;
@@ -274,7 +264,6 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     background: transparent;
     border-radius: 0px;
 }
-
 #sby-notifications .messages .message .title,
 #sbc-builder-app #sby-notifications .messages .message .title{
     font-weight: 600;
@@ -284,7 +273,6 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     color: #141B38;
     letter-spacing: 0;
 }
-
 #sby-notifications .messages .message .content {
     font-weight: normal;
     font-size: 14px;
@@ -292,7 +280,6 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     margin: 6px 0 32px 0;
     color: #434960;
 }
-
 #sby-notifications .messages .message .buttons {
     margin: -15px 105px 3px 0;
     display: flex;
@@ -393,7 +380,6 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     width: 72px;
     height: 30px;
 }
-
 #sby-notifications .navigation a {
     width: 32px;
     height: 32px;
@@ -411,12 +397,10 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     justify-content: center;
     transition: all 0.15s ease-in-out;
 }
-
 #sby-notifications .navigation svg {
     width: 9px;
     height: 9px;
 }
-
 #sby-notifications .navigation a:not(.disabled):hover {
     background-color: #fff;
 }
@@ -425,21 +409,17 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     background: #E8E8EB;
     color: #141B38;
 }
-
 #sby-notifications .navigation .prev {
     float: left;
 }
-
 #sby-notifications .navigation .next {
     float: right;
 }
-
 #sby-notifications .navigation .disabled {
     background: #E8E8EB;
     color: #8C8F9A;
     cursor: default;
 }
-
 @media screen and (max-width: 768px) {
     #sby-notifications {
         padding: 15px 15px 15px 72px;
@@ -462,8 +442,6 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
         margin-top: 6px;
     }
 }
-
-
 /* Review notice */
 .sby_notice{
     position: relative;
@@ -529,14 +507,12 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     width: 100%;
     padding: 0;
 }
-
 .sby_notice.sby_review_notice_step_1 .sby-notice-text {
     width: auto;
 }
 .sby_notice .sby-notice-text .sby-notice-text-p {
     margin-bottom: 15px;
 }
-
 .sby_notice .sby-notice-text .sby-notice-text-header {
     font-size: 16px;
     margin: 0 0 10px;
@@ -626,7 +602,6 @@ body .sby_review_step1_notice .sby-btn-link {
 body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     margin-right: 12px;
 }
-
 .sby_notice .sby_notice_close,
 .sby_notice .sby_bfcm_sale_notice_close,
 .sby_notice .sby_new_user_sale_notice_close {
@@ -640,9 +615,7 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
 .sby_notice .sby_notice_close:focus{
     color: #a34100;
 }
-
 /* Notice CTA btn */
-
 .sby_notice .sby_other_notice{
     padding-top: 10px;
     font-style: italic;
@@ -654,7 +627,6 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
 .sby-notice-consent-btns {
     float: left;
 }
-
 /*** sby Admin Notices ***/
 .sby-admin-notices {
     padding: 16px 60px 20px 60px;
@@ -821,7 +793,6 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
     padding: 0;
     cursor: pointer;
 }
-
 .sby-sb-modal-body .sb-modal-title,
 #sbc-builder-app .sby-sb-modal-body .sb-modal-title {
     font-size: 24px;
@@ -899,7 +870,6 @@ body .sby_review_step1_notice .sby-btn-link:not(:last-child) {
         margin-bottom: 0;
     }
 }
-
 body.index-php .sby-admin-notices {
     margin: 40px 20px 0 0;
 }

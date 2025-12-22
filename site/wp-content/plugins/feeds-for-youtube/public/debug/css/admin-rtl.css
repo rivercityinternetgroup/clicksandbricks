@@ -43,7 +43,6 @@
     color: #fff;
     transition: all 0.1s ease-in-out;
 }
-
 /* Quick Links */
 #sbspf_admin .sbspf-contents-links a,
 #sbspf_admin .sbspf-contents-links span {
@@ -99,7 +98,6 @@
     font-weight: bold;
     color: black;
 }
-
 /* Quick Start */
 #sbspf_admin .sbspf-quick-start{
     display: block;
@@ -154,7 +152,6 @@
     opacity: 0.95;
     transition: all 0.1s ease-in-out;
 }
-
 /* General Formatting */
 #sbspf_admin .sbspf_note {
     font-size: 12px;
@@ -178,7 +175,6 @@
     width: 100%;
     max-width: 700px;
 }
-
 /* Lock floating on top */
 .sbspf_lock {
     position: absolute;
@@ -196,12 +192,10 @@
     text-decoration: none;
     border: 1px solid #333;
 }
-
 .sbspf_lock svg {
     height: 11px;
     margin-left: 4px;
 }
-
 /* Types */
 #sbspf_admin .sbspf_row{
     width: 100%;
@@ -228,7 +222,6 @@
     zoom: 1;
     display: inline;
 }
-
 /* Log In Get Access Token Button */
 #sbspf_admin #sbspf_get_token{
     display: block;
@@ -246,7 +239,6 @@
     border-radius: 5px;
     transition: all 0.5s ease-in-out;
 }
-
 /* Connected Accounts */
 #sbspf_get_token svg {
     width: 29px;
@@ -302,7 +294,6 @@
     margin: 0;
     display: block;
 }
-
 #sbspf_admin .sbspf_ca_actions {
     display: inline-block;
 }
@@ -337,12 +328,10 @@
     -moz-animation-iteration-count: 1;
     -moz-animation-timing-function: linear;
 }
-
 #sbspf_admin .sbspf_account_active{
     border: 1px solid #b2ce88;
     background: #ecf2e3;
 }
-
 #sbspf_admin .sbspf_ca_alert {
     display: none;
 }
@@ -395,7 +384,6 @@
 #sbspf_admin .sbspf_ca_user_id {
     padding: 3px 10px;
 }
-
 #sbspf_admin .sbspf_ca_token,
 #sbspf_admin .sbspf_ca_user_id,
 #sbspf_admin .sbspf_ca_refresh_token{
@@ -418,7 +406,6 @@
     height: auto;
     line-height: 1;
 }
-
 #sbspf_admin .sbspf_delete_account{
     position: absolute;
     left: 10px;
@@ -449,7 +436,6 @@
 #sbspf_admin .sbspf_delete_account .sbspf_remove_text{
     margin-right: 5px;
 }
-
 .sbspf_connected_accounts_wrap{
     vertical-align: top;
 }
@@ -537,8 +523,6 @@
     margin-left: 8px;
     border-radius: 4px;
 }
-
-
 @media all and (max-width: 1200px){
     #sbspf_admin .sbspf_delete_account .sbspf_remove_text{
         display: none;
@@ -558,7 +542,6 @@
         width: 70%;
     }
 }
-
 /* GDPR Settings */
 #sbspf_admin .sby-list{
     list-style: inside disc;
@@ -609,7 +592,6 @@
     border: 1px solid #BA7B7B;
     color: #592626;
 }
-
 /* Configure */
 #sbspf_config {
     float: right;
@@ -651,7 +633,6 @@
     display: inline-block;
     margin: 5px 0 0 2px;
 }
-
 /* Layout */
 .form-table .sbspf_layout_type {
     display: inline-block;
@@ -784,7 +765,6 @@
 #sbspf_admin .sbspf_layout_mobile_layout_setting {
     width: auto;
 }
-
 /* Display Tab */
 #sbspf_admin table.sbspf_shortcode_table{
     border-collapse: collapse;
@@ -805,9 +785,7 @@
     background: #ddd;
     font-weight: bold;
 }
-
 /* Modal */
-
 #sbspf_modal_overlay{
     position: fixed;
     z-index: 999;
@@ -873,7 +851,6 @@
 .sbspf_modal .sbspf_modal_close:hover{
     color: #333;
 }
-
 /* SBY Specific */
 #sbspf_admin .sbspf_custom_search_wrap,
 #sbspf_admin .sbspf_onselect_reveal{
@@ -893,7 +870,6 @@
 #sbspf_usecustomsearch_reveal {
     margin-top: 2px;
 }
-
 #sbspf_admin .sby_mode_option {
     position: relative;
     margin-bottom: 20px;
@@ -939,7 +915,6 @@
     margin-left: -70px;
     margin-top: -20px;
 }
-
 .sby_api_key_needed {
     opacity: .6;
 }
@@ -950,12 +925,10 @@
 .sby_api_key_needed_message {
     font-weight: 700;
 }
-
 .sby_after_connection,
 .sby_api_needed {
     display: none;
 }
-
 /* Alert bubble */
 #sbspf_admin .nav-tab{
     position: relative;
@@ -980,7 +953,6 @@
     text-align: center;
     z-index: 26;
 }
-
 /* Social Wall landing page */
 #sbspf_admin.sw-landing-page{
     padding: 20px 0;
@@ -1108,7 +1080,6 @@
     width: 30px !important;
     height: 30px !important;
 }
-
 @media all and (max-width: 1500px){
     #sbspf_admin .sbspf-sw-screenshot{
         width: 55%;
@@ -1146,7 +1117,6 @@
         margin: 20px 0;
     }
 }
-
 /* Importer */
 .sby_status {
     margin-top: 10px;
@@ -1164,7 +1134,6 @@
     line-height: 16px;
     vertical-align: top;
 }
-
 /* Locator Summary */
 .sby-feed-locator-summary-wrap {
     max-width: 1100px;
@@ -1181,7 +1150,6 @@
     border-radius: 3px;
     line-height: 1.6;
 }
-
 .sby_shortcode_visible .sby_locations_link {
     display: none;
 }
@@ -1202,7 +1170,6 @@
 #adminmenu .wp-submenu .sby_get_pro_highlight:active{
   color: #FE544F;
 }
-
 /* Install Plugin Modal on Select Source Flow */
 #wpbody-content .sb-fs-boss {
     position: fixed;
@@ -1289,7 +1256,6 @@
 .sby-install-plugin-body .sby-install-plugin-header p .sb-author-logo {
 	margin-left: 8px;
 }
-
 .sby-install-plugin-body .sby-install-plugin-content {
 	padding: 20px 107px 32px 20px;
 }
@@ -1335,7 +1301,6 @@
 .sby-fb-mr-fd-list button {
 	cursor: pointer;
 }
-
 .sby-notice-alert {
     display: inline-block;
     position: absolute;
@@ -1353,7 +1318,6 @@
     text-align: center;
     z-index: 26;
 }
-
 /* Singe Videos Upsell Modal */
 .sbc-center-boss {
     display: flex;
@@ -1422,7 +1386,6 @@
 .ctf-extension-single-bullet svg {
     margin-left: 12px;
 }
-
 .sbc-extpp-btns {
     display: grid;
     grid-template-columns: 80% 20%;
