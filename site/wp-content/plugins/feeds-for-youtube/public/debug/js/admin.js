@@ -817,6 +817,7 @@ module.exports = function (KEY, exec, FORCED, SHAM) {
   var DELEGATES_TO_SYMBOL = !fails(function () {
     // String methods call symbol-named RegExp methods
     var O = {};
+    // eslint-disable-next-line unicorn/no-immediate-mutation -- ES3 syntax limitation
     O[SYMBOL] = function () { return 7; };
     return ''[KEY](O) !== 7;
   });
@@ -830,12 +831,13 @@ module.exports = function (KEY, exec, FORCED, SHAM) {
       // We can't use real regex here since it causes deoptimization
       // and serious performance degradation in V8
       // https://github.com/zloirock/core-js/issues/306
-      re = {};
       // RegExp[@@split] doesn't call the regex's exec method, but first creates
       // a new one. We need to return the patched regex when creating the new one.
-      re.constructor = {};
-      re.constructor[SPECIES] = function () { return re; };
-      re.flags = '';
+      var constructor = {};
+      // eslint-disable-next-line unicorn/no-immediate-mutation -- ES3 syntax limitation
+      constructor[SPECIES] = function () { return re; };
+      re = { constructor: constructor, flags: '' };
+      // eslint-disable-next-line unicorn/no-immediate-mutation -- ES3 syntax limitation
       re[SYMBOL] = /./[SYMBOL];
     }
 
@@ -1132,7 +1134,7 @@ module.exports = function (matched, str, position, captures, namedCaptures, repl
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/internals/global-this.js ***!
   \*******************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ (function(module) {
 
 
 var check = function (it) {
@@ -1146,7 +1148,7 @@ module.exports =
   check(typeof window == 'object' && window) ||
   // eslint-disable-next-line no-restricted-globals -- safe
   check(typeof self == 'object' && self) ||
-  check(typeof __webpack_require__.g == 'object' && __webpack_require__.g) ||
+  check(typeof globalThis == 'object' && globalThis) ||
   check(typeof this == 'object' && this) ||
   // eslint-disable-next-line no-new-func -- fallback
   (function () { return this; })() || Function('return this')();
@@ -2229,6 +2231,63 @@ module.exports = patchedExec;
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/regexp-flags-detection.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-flags-detection.js ***!
+  \******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "./node_modules/core-js/internals/global-this.js");
+var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
+
+// babel-minify and Closure Compiler transpiles RegExp('.', 'd') -> /./d and it causes SyntaxError
+var RegExp = globalThis.RegExp;
+
+var FLAGS_GETTER_IS_CORRECT = !fails(function () {
+  var INDICES_SUPPORT = true;
+  try {
+    RegExp('.', 'd');
+  } catch (error) {
+    INDICES_SUPPORT = false;
+  }
+
+  var O = {};
+  // modern V8 bug
+  var calls = '';
+  var expected = INDICES_SUPPORT ? 'dgimsy' : 'gimsy';
+
+  var addGetter = function (key, chr) {
+    // eslint-disable-next-line es/no-object-defineproperty -- safe
+    Object.defineProperty(O, key, { get: function () {
+      calls += chr;
+      return true;
+    } });
+  };
+
+  var pairs = {
+    dotAll: 's',
+    global: 'g',
+    ignoreCase: 'i',
+    multiline: 'm',
+    sticky: 'y'
+  };
+
+  if (INDICES_SUPPORT) pairs.hasIndices = 'd';
+
+  for (var key in pairs) addGetter(key, pairs[key]);
+
+  // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+  var result = Object.getOwnPropertyDescriptor(RegExp.prototype, 'flags').get.call(O);
+
+  return result !== expected || calls !== expected;
+});
+
+module.exports = { correct: FLAGS_GETTER_IS_CORRECT };
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/regexp-flags.js":
 /*!********************************************************!*\
   !*** ./node_modules/core-js/internals/regexp-flags.js ***!
@@ -2252,6 +2311,32 @@ module.exports = function () {
   if (that.unicodeSets) result += 'v';
   if (that.sticky) result += 'y';
   return result;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/internals/regexp-get-flags.js":
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-get-flags.js ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+var call = __webpack_require__(/*! ../internals/function-call */ "./node_modules/core-js/internals/function-call.js");
+var hasOwn = __webpack_require__(/*! ../internals/has-own-property */ "./node_modules/core-js/internals/has-own-property.js");
+var isPrototypeOf = __webpack_require__(/*! ../internals/object-is-prototype-of */ "./node_modules/core-js/internals/object-is-prototype-of.js");
+var regExpFlagsDetection = __webpack_require__(/*! ../internals/regexp-flags-detection */ "./node_modules/core-js/internals/regexp-flags-detection.js");
+var regExpFlagsGetterImplementation = __webpack_require__(/*! ../internals/regexp-flags */ "./node_modules/core-js/internals/regexp-flags.js");
+
+var RegExpPrototype = RegExp.prototype;
+
+module.exports = regExpFlagsDetection.correct ? function (it) {
+  return it.flags;
+} : function (it) {
+  return (!regExpFlagsDetection.correct && isPrototypeOf(RegExpPrototype, it) && !hasOwn(it, 'flags'))
+    ? call(regExpFlagsGetterImplementation, it)
+    : it.flags;
 };
 
 
@@ -2437,10 +2522,10 @@ var SHARED = '__core-js_shared__';
 var store = module.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
 (store.versions || (store.versions = [])).push({
-  version: '3.41.0',
+  version: '3.47.0',
   mode: IS_PURE ? 'pure' : 'global',
-  copyright: '© 2014-2025 Denis Pushkarev (zloirock.ru)',
-  license: 'https://github.com/zloirock/core-js/blob/v3.41.0/LICENSE',
+  copyright: '© 2014-2025 Denis Pushkarev (zloirock.ru), 2025 CoreJS Company (core-js.io)',
+  license: 'https://github.com/zloirock/core-js/blob/v3.47.0/LICENSE',
   source: 'https://github.com/zloirock/core-js'
 });
 
@@ -2800,7 +2885,7 @@ var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ 
 
 var TO_STRING_TAG = wellKnownSymbol('toStringTag');
 var test = {};
-
+// eslint-disable-next-line unicorn/no-immediate-mutation -- ES3 syntax limitation
 test[TO_STRING_TAG] = 'z';
 
 module.exports = String(test) === '[object z]';
@@ -2858,7 +2943,7 @@ var uncurryThis = __webpack_require__(/*! ../internals/function-uncurry-this */ 
 
 var id = 0;
 var postfix = Math.random();
-var toString = uncurryThis(1.0.toString);
+var toString = uncurryThis(1.1.toString);
 
 module.exports = function (key) {
   return 'Symbol(' + (key === undefined ? '' : key) + ')_' + toString(++id + postfix, 36);
@@ -3207,7 +3292,7 @@ var fixRegExpWellKnownSymbolLogic = __webpack_require__(/*! ../internals/fix-reg
 var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
 var anObject = __webpack_require__(/*! ../internals/an-object */ "./node_modules/core-js/internals/an-object.js");
 var isCallable = __webpack_require__(/*! ../internals/is-callable */ "./node_modules/core-js/internals/is-callable.js");
-var isNullOrUndefined = __webpack_require__(/*! ../internals/is-null-or-undefined */ "./node_modules/core-js/internals/is-null-or-undefined.js");
+var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
 var toIntegerOrInfinity = __webpack_require__(/*! ../internals/to-integer-or-infinity */ "./node_modules/core-js/internals/to-integer-or-infinity.js");
 var toLength = __webpack_require__(/*! ../internals/to-length */ "./node_modules/core-js/internals/to-length.js");
 var toString = __webpack_require__(/*! ../internals/to-string */ "./node_modules/core-js/internals/to-string.js");
@@ -3215,6 +3300,7 @@ var requireObjectCoercible = __webpack_require__(/*! ../internals/require-object
 var advanceStringIndex = __webpack_require__(/*! ../internals/advance-string-index */ "./node_modules/core-js/internals/advance-string-index.js");
 var getMethod = __webpack_require__(/*! ../internals/get-method */ "./node_modules/core-js/internals/get-method.js");
 var getSubstitution = __webpack_require__(/*! ../internals/get-substitution */ "./node_modules/core-js/internals/get-substitution.js");
+var getRegExpFlags = __webpack_require__(/*! ../internals/regexp-get-flags */ "./node_modules/core-js/internals/regexp-get-flags.js");
 var regExpExec = __webpack_require__(/*! ../internals/regexp-exec-abstract */ "./node_modules/core-js/internals/regexp-exec-abstract.js");
 var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
 
@@ -3265,7 +3351,7 @@ fixRegExpWellKnownSymbolLogic('replace', function (_, nativeReplace, maybeCallNa
     // https://tc39.es/ecma262/#sec-string.prototype.replace
     function replace(searchValue, replaceValue) {
       var O = requireObjectCoercible(this);
-      var replacer = isNullOrUndefined(searchValue) ? undefined : getMethod(searchValue, REPLACE);
+      var replacer = isObject(searchValue) ? getMethod(searchValue, REPLACE) : undefined;
       return replacer
         ? call(replacer, searchValue, O, replaceValue)
         : call(nativeReplace, toString(O), searchValue, replaceValue);
@@ -3288,10 +3374,11 @@ fixRegExpWellKnownSymbolLogic('replace', function (_, nativeReplace, maybeCallNa
       var functionalReplace = isCallable(replaceValue);
       if (!functionalReplace) replaceValue = toString(replaceValue);
 
-      var global = rx.global;
+      var flags = toString(getRegExpFlags(rx));
+      var global = stringIndexOf(flags, 'g') !== -1;
       var fullUnicode;
       if (global) {
-        fullUnicode = rx.unicode;
+        fullUnicode = stringIndexOf(flags, 'u') !== -1;
         rx.lastIndex = 0;
       }
 
@@ -3356,7 +3443,7 @@ var call = __webpack_require__(/*! ../internals/function-call */ "./node_modules
 var uncurryThis = __webpack_require__(/*! ../internals/function-uncurry-this */ "./node_modules/core-js/internals/function-uncurry-this.js");
 var fixRegExpWellKnownSymbolLogic = __webpack_require__(/*! ../internals/fix-regexp-well-known-symbol-logic */ "./node_modules/core-js/internals/fix-regexp-well-known-symbol-logic.js");
 var anObject = __webpack_require__(/*! ../internals/an-object */ "./node_modules/core-js/internals/an-object.js");
-var isNullOrUndefined = __webpack_require__(/*! ../internals/is-null-or-undefined */ "./node_modules/core-js/internals/is-null-or-undefined.js");
+var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
 var requireObjectCoercible = __webpack_require__(/*! ../internals/require-object-coercible */ "./node_modules/core-js/internals/require-object-coercible.js");
 var speciesConstructor = __webpack_require__(/*! ../internals/species-constructor */ "./node_modules/core-js/internals/species-constructor.js");
 var advanceStringIndex = __webpack_require__(/*! ../internals/advance-string-index */ "./node_modules/core-js/internals/advance-string-index.js");
@@ -3404,7 +3491,7 @@ fixRegExpWellKnownSymbolLogic('split', function (SPLIT, nativeSplit, maybeCallNa
     // https://tc39.es/ecma262/#sec-string.prototype.split
     function split(separator, limit) {
       var O = requireObjectCoercible(this);
-      var splitter = isNullOrUndefined(separator) ? undefined : getMethod(separator, SPLIT);
+      var splitter = isObject(separator) ? getMethod(separator, SPLIT) : undefined;
       return splitter
         ? call(splitter, separator, O, limit)
         : call(internalSplit, toString(O), separator, limit);
@@ -3595,18 +3682,6 @@ __webpack_require__(/*! ../modules/web.set-timeout */ "./node_modules/core-js/mo
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
