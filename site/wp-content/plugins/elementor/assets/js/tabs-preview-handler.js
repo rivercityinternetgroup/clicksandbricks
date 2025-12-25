@@ -1,10 +1,10 @@
 "use strict";
-(self["webpackChunkelementorFrontend"] = self["webpackChunkelementorFrontend"] || []).push([["tabs-handler"],{
+(self["webpackChunkelementorFrontend"] = self["webpackChunkelementorFrontend"] || []).push([["tabs-preview-handler"],{
 
-/***/ "../modules/atomic-widgets/elements/atomic-tabs/handlers/atomic-tabs-handler.js":
-/*!**************************************************************************************!*\
-  !*** ../modules/atomic-widgets/elements/atomic-tabs/handlers/atomic-tabs-handler.js ***!
-  \**************************************************************************************/
+/***/ "../modules/atomic-widgets/elements/atomic-tabs/handlers/atomic-tabs-preview-handler.js":
+/*!**********************************************************************************************!*\
+  !*** ../modules/atomic-widgets/elements/atomic-tabs/handlers/atomic-tabs-preview-handler.js ***!
+  \**********************************************************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 
@@ -12,76 +12,34 @@
 var _frontendHandlers = __webpack_require__(/*! @elementor/frontend-handlers */ "@elementor/frontend-handlers");
 var _alpinejs = __webpack_require__(/*! @elementor/alpinejs */ "@elementor/alpinejs");
 var _utils = __webpack_require__(/*! ./utils */ "../modules/atomic-widgets/elements/atomic-tabs/handlers/utils.js");
-const SELECTED_CLASS = 'e--selected';
 (0, _frontendHandlers.register)({
   elementType: 'e-tabs',
-  id: 'e-tabs-handler',
+  id: 'e-tabs-preview-handler',
   callback: ({
     element,
-    settings
+    signal,
+    listenToChildren
   }) => {
-    const tabsId = element.dataset.id;
-    _alpinejs.Alpine.data(`eTabs${tabsId}`, () => ({
-      activeTab: settings['default-active-tab'],
-      navigateTabs({
-        key,
-        target: tab
-      }) {
-        const nextTab = (0, _utils.getNextTab)(key, tab);
-        nextTab.focus();
-      },
-      tab: {
-        ':id'() {
-          const index = (0, _utils.getIndex)(this.$el, _utils.TAB_ELEMENT_TYPE);
-          return (0, _utils.getTabId)(tabsId, index);
-        },
-        '@click'() {
-          const id = this.$el.id;
-          this.activeTab = id;
-        },
-        '@keydown.arrow-right.prevent'(event) {
-          this.navigateTabs(event);
-        },
-        '@keydown.arrow-left.prevent'(event) {
-          this.navigateTabs(event);
-        },
-        ':class'() {
-          const id = this.$el.id;
-          return this.activeTab === id ? SELECTED_CLASS : '';
-        },
-        ':aria-selected'() {
-          const id = this.$el.id;
-          return this.activeTab === id ? 'true' : 'false';
-        },
-        ':tabindex'() {
-          const id = this.$el.id;
-          return this.activeTab === id ? '0' : '-1';
-        },
-        ':aria-controls'() {
-          const index = (0, _utils.getIndex)(this.$el, _utils.TAB_ELEMENT_TYPE);
-          return (0, _utils.getTabContentId)(tabsId, index);
-        }
-      },
-      tabContent: {
-        ':aria-labelledby'() {
-          const index = (0, _utils.getIndex)(this.$el, _utils.TAB_CONTENT_ELEMENT_TYPE);
-          return (0, _utils.getTabId)(tabsId, index);
-        },
-        'x-show'() {
-          const index = (0, _utils.getIndex)(this.$el, _utils.TAB_CONTENT_ELEMENT_TYPE);
-          const tabId = (0, _utils.getTabId)(tabsId, index);
-          const isActive = this.activeTab === tabId;
-          this.$nextTick(() => {
-            this.$el.classList.toggle(SELECTED_CLASS, isActive);
-          });
-          return isActive;
-        },
-        ':id'() {
-          const index = (0, _utils.getIndex)(this.$el, _utils.TAB_CONTENT_ELEMENT_TYPE);
-          return (0, _utils.getTabContentId)(tabsId, index);
-        }
+    window?.parent.addEventListener('elementor/navigator/item/click', event => {
+      const {
+        id,
+        type
+      } = event.detail;
+      if (type !== _utils.TAB_ELEMENT_TYPE && type !== _utils.TAB_CONTENT_ELEMENT_TYPE) {
+        return;
       }
-    }));
+      const targetElement = _alpinejs.Alpine.$data(element).$refs[id];
+      if (!targetElement) {
+        return;
+      }
+      const targetIndex = (0, _utils.getIndex)(targetElement, type);
+      _alpinejs.Alpine.$data(element).activeTab = (0, _utils.getTabId)(element.dataset.id, targetIndex);
+    }, {
+      signal
+    });
+
+    // Re-initialize Alpine to sync with editor DOM manipulations that bypass Alpine's reactivity.
+    listenToChildren([_utils.TAB_ELEMENT_TYPE, _utils.TAB_CONTENT_ELEMENT_TYPE]).render(() => (0, _alpinejs.refreshTree)(element));
   }
 });
 
@@ -2577,7 +2535,7 @@ module.exports = elementorV2.frontendHandlers;
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ var __webpack_exports__ = (__webpack_exec__("../modules/atomic-widgets/elements/atomic-tabs/handlers/atomic-tabs-handler.js"));
+/******/ var __webpack_exports__ = (__webpack_exec__("../modules/atomic-widgets/elements/atomic-tabs/handlers/atomic-tabs-preview-handler.js"));
 /******/ }
 ]);
-//# sourceMappingURL=tabs-handler.js.map
+//# sourceMappingURL=tabs-preview-handler.js.map
